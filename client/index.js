@@ -1,7 +1,17 @@
 /* eslint-disable prettier/prettier */
-console.log('hello from js');
+const { createApp } = Vue;
 
-axios.get('/api/datasources')
-  .then(function (response) {
-    console.log(response.data);
-  });
+createApp({
+  data() {
+    return {
+      datasources: [],
+    }
+  },
+  mounted () {
+    axios.get('/api/datasources').then(response => {
+      this.datasources = response.data;
+      console.log(this.datasources);
+    });
+  }
+}).mount('#app')
+

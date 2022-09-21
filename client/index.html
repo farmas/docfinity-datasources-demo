@@ -36,13 +36,23 @@
 
   <main class='container'>
     <div class='bg-light p-5 rounded' style="margin-top:50px;">
-      <h1>TEST</h1>
+      <h2>Datasources</h2>
       <div id="app">
-        <ul class="list-group">
-          <li class="list-group-item" v-for="datasource in datasources">
-            {{datasource.definition.name}}
-          </li>
-        </ul>
+        <div class="container">
+          <div class="row">
+            <div class="col-3">
+              <ul class="list-group">
+                <li class="list-group-item" v-for="datasource in datasources" @click="foo">
+                  {{datasource.definition.name}}
+                </li>
+              </ul>
+            </div>
+            <div class="col-9">col-9</div>
+          </div>
+        </div>
+
+
+        
       </div>
     </div>
   </main>

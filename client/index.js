@@ -7,6 +7,11 @@ createApp({
       datasources: [],
     }
   },
+  methods: {
+    foo(event) {
+      console.log('clicked');
+    }
+  },
   mounted () {
     axios.get('/api/datasources').then(response => {
       this.datasources = response.data;

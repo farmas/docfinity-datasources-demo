@@ -13,4 +13,4 @@ where
     parentValue = @parentValue
 order by
     ISNULL(sortOrder, 0),
-    value asc
+    value desc

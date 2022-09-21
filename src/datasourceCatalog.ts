@@ -1,8 +1,8 @@
 import { DatasourceDefinition } from './typings';
-//import * as aeds from '../data/datasources/AEDS: Divisions.json';
+import { aedsDivisions } from './datasources/AEDS-Divisions';
 
 export const datasources: DatasourceDefinition[] = [
-  //buildDatasourceDefinition(aeds),
+  buildDatasourceDefinition(aedsDivisions),
 ];
 
 function buildDatasourceDefinition(json: any): DatasourceDefinition {

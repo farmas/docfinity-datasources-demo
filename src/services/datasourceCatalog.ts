@@ -2,30 +2,26 @@ import * as fs from 'fs';
 import { DatasourceDefinition } from '../typings';
 
 export function buildDatasources(): DatasourceDefinition[] {
-  const result: DatasourceDefinition[] = [];
-
-  const json: string = fs.readFileSync(
-    './data/datasources/AEDS: Divisions.json',
-    'utf8',
-  );
-  const sql = fs.readFileSync('./data/datasources/AEDS: Divisions.sql', 'utf8');
-
-  const dfDatasource = JSON.parse(json);
-  result.push(buildDatasourceDefinition(dfDatasource, sql));
-
-  return result;
+  return [
+    buildDatasourceDefinition('AEDS: Divisions'),
+    buildDatasourceDefinition('IND_Generic Record Retention Date'),
+  ];
 }
 
-function buildDatasourceDefinition(
-  json: any,
-  sql: string,
-): DatasourceDefinition {
+function buildDatasourceDefinition(name: string): DatasourceDefinition {
+  const json: string = fs.readFileSync(
+    `./data/datasources/${name}.json`,
+    'utf8',
+  );
+  const sql = fs.readFileSync(`./data/datasources/${name}.sql`, 'utf8');
+  const dfDatasource = JSON.parse(json);
+
   return {
-    name: json.name,
-    datasourceType: json.datasourceType,
-    description: json.description,
+    name: dfDatasource.name,
+    datasourceType: dfDatasource.datasourceType,
+    description: dfDatasource.description,
     sql: sql,
-    parameters: json.parameters,
+    parameters: dfDatasource.parameters,
   };
 }
 

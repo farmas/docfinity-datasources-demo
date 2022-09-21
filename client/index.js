@@ -5,17 +5,21 @@ createApp({
   data() {
     return {
       datasources: [],
+      selectedDatasource: null,
+      message: null
     }
   },
   methods: {
-    foo(event) {
-      console.log('clicked');
+    selectDatasource(datasource) {
+      console.log('Selected', datasource.definition.name);
+      this.selectedDatasource = datasource;
     }
   },
   mounted () {
     axios.get('/api/datasources').then(response => {
+      console.log(response.data);
+      globalDatasources = response.data.slice(0);
       this.datasources = response.data;
-      console.log(this.datasources);
     });
   }
 }).mount('#app')

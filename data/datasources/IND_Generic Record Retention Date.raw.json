@@ -1,0 +1,134 @@
+{
+  "clientOnly": false,
+  "configResourcePath": "DynamicSqlDatasourceConfig.swf",
+  "hasCustomInterface": false,
+  "datasourceType": "DynamicSql",
+  "description": "[farmas 11/23/2021]: Reviewed.\n\nThis datasource is designed to utilize four columns from the _UW_Retention_Mapping custom table to determine (in real time) the Record Retention Trigger Date of a document; Category, DocumentType, RecordType, and RetentionDateRule. The custom table contains a RetentionDateRule column that is mapped to a unique Category, DocumentType, and RecordType.",
+  "displayName": "Dynamic SQL",
+  "entryControlResourcePath": "DynamicSqlDatasource.swf",
+  "id": "00000001f9jrdcw321fttzvdrt15zqcc",
+  "name": "IND_Generic Record Retention Date",
+  "properties": [
+    {
+      "name": "sqlQuery",
+      "value": [
+        "declare \n    @category varchar(100) = ${DOCUMENT.category},\n    @documentType varchar(100) = ${DOCUMENT.documentType},\n    @recordType varchar(400) = ${Record Type},\n    @createdDate date = ${Ingest Date}\n\ndeclare @rule varchar(100) = (\n                                 select top 1\n                                     RetentionDateRule\n                                 from\n                                     _UW_Retention_Mapping\n                                 where\n                                     RecordType = @recordType\n                                     and Category = @category\n                                     and DocumentType = @documentType\n                                     and (deleted = 0 or deleted is null)\n                             )\n\n/*\nEx. \"Created Date + 3 Years\", replace \"Created Date +\", leaves you with “ 3 Years”, replace “Years”, leaves you with “ 3 “, replace Year, leaves you with “ 3 “, trimmed, leaves you with “3”\n*/\ndeclare @years varchar(10)\n    =       (\n                select\n                    TRIM(TRIM(REPLACE(REPLACE(REPLACE(@rule, 'Created Date + ', ''), ' Years', ''), ' Year', '')))\n            )\n\n\nif @rule = 'Created Date'\n    select\n        @createdDate\nelse if @rule like 'Created Date%'\n    select\n        dateadd(year, cast(@years as int), @createdDate)\nelse if @rule = 'End Fiscal Year'\n        or @rule = 'End Academic Year'\n    select\n        case when\n            month(@createdDate) < 7 then  \n                         cast(cast(year(@createdDate) as varchar) + '-07-01' as date)\n            else \n                         dateadd(year, 1, cast(cast(year(@createdDate) as varchar) + '-07-01' as date))\n            end\nelse if @rule = 'End Calendar Year'\n    select top 1\n         dateadd(year, 1, cast(cast(year(@createdDate) as varchar) + '-01-01' as date))\nelse --manual trigger\n    select\n        ''"
+      ],
+      "id": "00000001f9jrdcw321fttzvdrt15zqce",
+      "datasourceId": "00000001f9jrdcw321fttzvdrt15zqcc",
+      "displayName": "sqlQuery",
+      "displayValue": "declare \n    @category varchar(100) = ${DOCUMENT.category},\n    @documentType varchar(100) = ${DOCUMENT.documentType},\n    @recordType varchar(400) = ${Record Type},\n    @createdDate date = ${Ingest Date}\n\ndeclare @rule varchar(100) = (\n                                 select top 1\n                                     RetentionDateRule\n                                 from\n                                     _UW_Retention_Mapping\n                                 where\n                                     RecordType = @recordType\n                                     and Category = @category\n                                     and DocumentType = @documentType\n                                     and (deleted = 0 or deleted is null)\n                             )\n\n/*\nEx. \"Created Date + 3 Years\", replace \"Created Date +\", leaves you with “ 3 Years”, replace “Years”, leaves you with “ 3 “, replace Year, leaves you with “ 3 “, trimmed, leaves you with “3”\n*/\ndeclare @years varchar(10)\n    =       (\n                select\n                    TRIM(TRIM(REPLACE(REPLACE(REPLACE(@rule, 'Created Date + ', ''), ' Years', ''), ' Year', '')))\n            )\n\n\nif @rule = 'Created Date'\n    select\n        @createdDate\nelse if @rule like 'Created Date%'\n    select\n        dateadd(year, cast(@years as int), @createdDate)\nelse if @rule = 'End Fiscal Year'\n        or @rule = 'End Academic Year'\n    select\n        case when\n            month(@createdDate) < 7 then  \n                         cast(cast(year(@createdDate) as varchar) + '-07-01' as date)\n            else \n                         dateadd(year, 1, cast(cast(year(@createdDate) as varchar) + '-07-01' as date))\n            end\nelse if @rule = 'End Calendar Year'\n    select top 1\n         dateadd(year, 1, cast(cast(year(@createdDate) as varchar) + '-01-01' as date))\nelse --manual trigger\n    select\n        ''",
+      "markedForDelete": false
+    }
+  ],
+  "parameterNames": [
+    "DOCUMENT.category",
+    "Record Type",
+    "DOCUMENT.documentType",
+    "Ingest Date"
+  ],
+  "referenced": true,
+  "parameters": [
+    {
+      "id": "00000001fe080h9bbcwwv49fw6bkb34c",
+      "name": "Record Type",
+      "source": "VARIABLE",
+      "dataType": "STRING",
+      "value": "Record Type",
+      "datasourceId": "00000001f9jrdcw321fttzvdrt15zqcc",
+      "datasourceName": "IND_Generic Record Retention Date"
+    },
+    {
+      "id": "00000001fe1q7xbwxsafd1frwbtpna13",
+      "name": "DOCUMENT.category",
+      "source": "VARIABLE",
+      "dataType": "STRING",
+      "value": "DOCUMENT.category",
+      "datasourceId": "00000001f9jrdcw321fttzvdrt15zqcc",
+      "datasourceName": "IND_Generic Record Retention Date"
+    },
+    {
+      "id": "00000001fjmn2846e9ve17f5g3ee4p53",
+      "name": "Ingest Date",
+      "source": "VARIABLE",
+      "dataType": "STRING",
+      "value": "Ingest Date",
+      "datasourceId": "00000001f9jrdcw321fttzvdrt15zqcc",
+      "datasourceName": "IND_Generic Record Retention Date"
+    },
+    {
+      "id": "00000001fe1q7xbwxsafd1frwbtpna14",
+      "name": "DOCUMENT.documentType",
+      "source": "VARIABLE",
+      "dataType": "STRING",
+      "value": "DOCUMENT.documentType",
+      "datasourceId": "00000001f9jrdcw321fttzvdrt15zqcc",
+      "datasourceName": "IND_Generic Record Retention Date"
+    }
+  ],
+  "pathParameters": [],
+  "queryParameters": [],
+  "requestParameters": [],
+  "formParameters": [],
+  "promptList": [
+    {
+      "allowMultipleValues": false,
+      "name": "DOCUMENT.category",
+      "type": "DASHBOARD_PROMPT",
+      "dataType": "STRING",
+      "datasourceHasOptionalVars": false,
+      "ordinal": 0,
+      "label": "DOCUMENT.category",
+      "inputType": "TEXT_FIELD",
+      "defaultValueType": "NONE",
+      "hidden": false,
+      "required": true,
+      "editable": true
+    },
+    {
+      "allowMultipleValues": false,
+      "name": "Record Type",
+      "type": "DASHBOARD_PROMPT",
+      "dataType": "STRING",
+      "datasourceHasOptionalVars": false,
+      "ordinal": 1,
+      "label": "Record Type",
+      "inputType": "TEXT_FIELD",
+      "defaultValueType": "NONE",
+      "hidden": false,
+      "required": true,
+      "editable": true
+    },
+    {
+      "allowMultipleValues": false,
+      "name": "DOCUMENT.documentType",
+      "type": "DASHBOARD_PROMPT",
+      "dataType": "STRING",
+      "datasourceHasOptionalVars": false,
+      "ordinal": 2,
+      "label": "DOCUMENT.documentType",
+      "inputType": "TEXT_FIELD",
+      "defaultValueType": "NONE",
+      "hidden": false,
+      "required": true,
+      "editable": true
+    },
+    {
+      "allowMultipleValues": false,
+      "name": "Ingest Date",
+      "type": "DASHBOARD_PROMPT",
+      "dataType": "STRING",
+      "datasourceHasOptionalVars": false,
+      "ordinal": 3,
+      "label": "Ingest Date",
+      "inputType": "TEXT_FIELD",
+      "defaultValueType": "NONE",
+      "hidden": false,
+      "required": true,
+      "editable": true
+    }
+  ],
+  "testable": true,
+  "jsons": [],
+  "optionalVariables": false
+}

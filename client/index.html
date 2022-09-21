@@ -41,27 +41,36 @@
         <div class="container">
           <div class="row">
             <div class="col-3">
-              <ul class="list-group">
-                <li class="list-group-item" v-for="datasource in datasources" @click="foo">
+              <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action" v-for="datasource in datasources"
+                  @click="selectDatasource(datasource)" :key="datasource.definition.name">
+                  {{datasource.definition.name}}
+                </a>
+              </div>
+
+
+              <!-- <ul class="list-group">
+                <li class="list-group-item" v-for="datasource in datasources" @click="selectDatasource(datasource)">
                   {{datasource.definition.name}}
                 </li>
-              </ul>
+              </ul> -->
             </div>
-            <div class="col-9">col-9</div>
+            <div class="col-9">
+              <pre>
+{{selectedDatasource?.definition?.sql}}
+              </pre>
+            </div>
           </div>
         </div>
-
-
-        
       </div>
     </div>
   </main>
   <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js'
     integrity='sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8'
     crossorigin='anonymous'></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="index.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="index.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,31 @@
+{
+  "name": "IND_Generic Record Retention Date",
+  "datasourceType": "DynamicSql",
+  "description": "[farmas 11/23/2021]: Reviewed.\n\nThis datasource is designed to utilize four columns from the _UW_Retention_Mapping custom table to determine (in real time) the Record Retention Trigger Date of a document; Category, DocumentType, RecordType, and RetentionDateRule. The custom table contains a RetentionDateRule column that is mapped to a unique Category, DocumentType, and RecordType.",
+  "parameters": [
+    {
+      "name": "Record Type",
+      "source": "VARIABLE",
+      "dataType": "STRING",
+      "value": "Record Type"
+    },
+    {
+      "name": "DOCUMENT.category",
+      "source": "VARIABLE",
+      "dataType": "STRING",
+      "value": "DOCUMENT.category"
+    },
+    {
+      "name": "Ingest Date",
+      "source": "VARIABLE",
+      "dataType": "STRING",
+      "value": "Ingest Date"
+    },
+    {
+      "name": "DOCUMENT.documentType",
+      "source": "VARIABLE",
+      "dataType": "STRING",
+      "value": "DOCUMENT.documentType"
+    }
+  ]
+}

@@ -3,7 +3,7 @@ export interface DatasourceDefinition {
   name: string;
   datasourceType: string;
   description: string;
-  value: string;
+  sql: string;
   parameters: DatasourceParameterDefinition[];
 }
 

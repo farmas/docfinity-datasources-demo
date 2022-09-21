@@ -1,81 +1,11 @@
 {
-  "clientOnly": false,
-  "configResourcePath": "DynamicSqlDatasourceConfig.swf",
-  "hasCustomInterface": false,
+  "name": "AEDS: Divisions",
   "datasourceType": "DynamicSql",
   "description": "See CAB-4838",
-  "displayName": "Dynamic SQL",
-  "entryControlResourcePath": "DynamicSqlDatasource.swf",
-  "id": "00000001g7b5vaa2jcvwaxqra76nndsb",
-  "name": "AEDS: Divisions",
-  "properties": [
-    {
-      "name": "dbConnectionId",
-      "value": [
-        "-1"
-      ],
-      "id": "00000001g7b5vaa2jcvwaxqra76nndse",
-      "datasourceId": "00000001g7b5vaa2jcvwaxqra76nndsb",
-      "displayName": "dbConnectionId",
-      "displayValue": "DocFinity Core Database Connection",
-      "markedForDelete": false
-    },
-    {
-      "name": "sqlQuery",
-      "value": [
-        "declare\n    @parentDatasource varchar(100) = 'AEDS: SCCs',\n    @childDatasource varchar(100) = 'AEDS: Divisions',\n    @parentValue varchar(100) = ${SCC};\n\nselect\n    value\nfrom\n    _UW_Dropdown_Source_Table\nwhere\n    parentDatasource = @parentDatasource and\n    datasource = @childDatasource and\n    parentValue = @parentValue\norder by\n    ISNULL(sortOrder, 0),\n    value asc"
-      ],
-      "id": "00000001g7b5vaa2jcvwaxqra76nndsf",
-      "datasourceId": "00000001g7b5vaa2jcvwaxqra76nndsb",
-      "displayName": "sqlQuery",
-      "displayValue": "declare\n    @parentDatasource varchar(100) = 'AEDS: SCCs',\n    @childDatasource varchar(100) = 'AEDS: Divisions',\n    @parentValue varchar(100) = ${SCC};\n\nselect\n    value\nfrom\n    _UW_Dropdown_Source_Table\nwhere\n    parentDatasource = @parentDatasource and\n    datasource = @childDatasource and\n    parentValue = @parentValue\norder by\n    ISNULL(sortOrder, 0),\n    value asc",
-      "markedForDelete": false
-    }
-  ],
-  "parameterNames": [
-    "SCC"
-  ],
-  "referenced": true,
-  "parameters": [
-    {
-      "id": "00000001g7b5vaa2jcvwaxqra76nndsd",
-      "name": "SCC",
-      "source": "VARIABLE",
-      "dataType": "STRING",
-      "value": "SCC",
-      "datasourceId": "00000001g7b5vaa2jcvwaxqra76nndsb",
-      "datasourceName": "AEDS: Divisions"
-    }
-  ],
-  "pathParameters": [],
-  "queryParameters": [],
-  "requestParameters": [],
-  "formParameters": [],
-  "intents": [
-    {
-      "id": "00000001g7b5vaa2jcvwaxqra76nndsc",
-      "datasourceId": "00000001g7b5vaa2jcvwaxqra76nndsb",
-      "datasourceName": "AEDS: Divisions",
-      "intent": "SIMPLE"
-    }
-  ],
-  "promptList": [
-    {
-      "allowMultipleValues": false,
-      "name": "SCC",
-      "type": "DASHBOARD_PROMPT",
-      "dataType": "STRING",
-      "datasourceHasOptionalVars": false,
-      "ordinal": 0,
-      "label": "SCC",
-      "inputType": "TEXT_FIELD",
-      "defaultValueType": "NONE",
-      "hidden": false,
-      "required": true,
-      "editable": true
-    }
-  ],
-  "testable": true,
-  "jsons": [],
-  "optionalVariables": false
+  "parameters": [{
+    "name": "SCC",
+    "source": "VARIABLE",
+    "dataType": "STRING",
+    "value": "SCC"
+  }]
 }

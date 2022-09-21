@@ -1,5 +1,7 @@
 import { Body, Controller, Get, Post, Render } from '@nestjs/common';
-import { AppService } from './app.service';
+import { DatasourceViewModel } from './models/datasourceViewModel';
+import { IndexViewModel } from './models/indexViewModel';
+import { DatasourceService } from './services/datasourceService';
 
 export class CompareRequest {
   apiKey: string;
@@ -8,17 +10,21 @@ export class CompareRequest {
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly datasourceService: DatasourceService) {}
 
   @Get()
   @Render('index')
   index() {
-    return { message: 'FOO!' };
+    return new IndexViewModel();
   }
 
   @Get('/api/datasources')
-  getDatasoures() {
-    return { message: 'hola!' };
+  getDatasoures(): DatasourceViewModel[] {
+    const result = this.datasourceService
+      .getDatasources()
+      .map((d) => new DatasourceViewModel(d));
+
+    return result;
   }
 
   @Post()

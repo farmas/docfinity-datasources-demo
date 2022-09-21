@@ -13,6 +13,9 @@ createApp({
     selectDatasource(datasource) {
       console.log('Selected', datasource.definition.name);
       this.selectedDatasource = datasource;
+    },
+    compare() {
+      console.log('compare');
     }
   },
   mounted () {

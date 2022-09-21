@@ -10,13 +10,6 @@ export class CompareRequest {
 @Controller()
 export class AppController {
   constructor(private readonly datasourceService: DatasourceService) {}
-
-  // @Get()
-  // @Render('index')
-  // index() {
-  //   return new IndexViewModel();
-  // }
-
   @Get('/api/datasources')
   getDatasoures(): DatasourceViewModel[] {
     const result = this.datasourceService

@@ -8,36 +8,36 @@
 </head>
 
 <body>
-  <nav class='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
-    <div class='container-fluid'>
-      <form method="POST" class='row align-items-center'>
-        <div class='col-auto'>
-          <label for='inputApiKey' class='col-form-label form-text'>DocFinity
-            API Key:</label>
+  <div id="app">
+    <nav class='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
+      <div class='container-fluid'>
+        <div class='row align-items-center'>
+          <div class='col-auto'>
+            <label for='inputApiKey' class='col-form-label form-text'>DocFinity
+              API Key:</label>
+          </div>
+          <div class='col-auto' style="width:500px;">
+            <input type='text' name="apiKey" id='inputApiKey' class='form-control' placeholder="DocFinity API-KEY" />
+          </div>
+          <div class='col-auto'>
+            <label for='inputEnvironment' class='col-form-label form-text'>Environment:</label>
+          </div>
+          <div class='col-auto'>
+            <select class="form-select" name="environment" aria-label="Default select example">
+              <option value="test" selected>TEST - https://uw.cloudtest.docfinity.com</option>
+              <option value="prod">PROD - https://uw.cloud.docfinity.com</option>
+            </select>
+          </div>
+          <div class='col-auto'>
+            <button class='btn btn-outline-success' @click="compare">Compare</button>
+          </div>
         </div>
-        <div class='col-auto' style="width:500px;">
-          <input type='text' name="apiKey" id='inputApiKey' class='form-control' placeholder="DocFinity API-KEY" />
-        </div>
-        <div class='col-auto'>
-          <label for='inputEnvironment' class='col-form-label form-text'>Environment:</label>
-        </div>
-        <div class='col-auto'>
-          <select class="form-select" name="environment" aria-label="Default select example">
-            <option value="test" selected>TEST - https://uw.cloudtest.docfinity.com</option>
-            <option value="prod">PROD - https://uw.cloud.docfinity.com</option>
-          </select>
-        </div>
-        <div class='col-auto'>
-          <button class='btn btn-outline-success' type='submit'>Compare</button>
-        </div>
-      </form>
-    </div>
-  </nav>
+      </div>
+    </nav>
 
-  <main class='container'>
-    <div class='bg-light p-5 rounded' style="margin-top:50px;">
-      <h2>Datasources</h2>
-      <div id="app">
+    <main class='container'>
+      <div class='bg-light p-5 rounded' style="margin-top:50px;">
+        <h2>Datasources</h2>
         <div class="container">
           <div class="row">
             <div class="col-3">
@@ -47,13 +47,6 @@
                   {{datasource.definition.name}}
                 </a>
               </div>
-
-
-              <!-- <ul class="list-group">
-                <li class="list-group-item" v-for="datasource in datasources" @click="selectDatasource(datasource)">
-                  {{datasource.definition.name}}
-                </li>
-              </ul> -->
             </div>
             <div class="col-9">
               <pre>
@@ -63,8 +56,8 @@
           </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
+  </div>
   <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js'
     integrity='sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8'
     crossorigin='anonymous'></script>

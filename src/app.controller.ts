@@ -19,10 +19,4 @@ export class AppController {
   compareDatasoures() {
     return this.datasourceService.compareDatasources();
   }
-
-  // @Post()
-  // @Render('index')
-  // compareDatasoures(@Body() compareDTO: CompareRequest) {
-  //   return { message: `${compareDTO.environment}: ${compareDTO.apiKey}` };
-  // }
 }

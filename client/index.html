@@ -4,6 +4,7 @@
   <meta charset='utf-8' />
   <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css' rel='stylesheet'
     integrity='sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT' crossorigin='anonymous' />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
     <title>App</title>
 </head>
@@ -42,17 +43,37 @@
           <div class="row">
             <div class="col-3">
               <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action" v-for="datasource in datasources"
+                <a href="#"
+                  v-for="datasource in datasources"
+                  class="list-group-item list-group-item-action"
+                  :class="{ 'list-group-item-success': datasource.remote && !datasource.diff, 'list-group-item-danger': datasource.remote && datasource.diff }"
                   @click="selectDatasource(datasource)" :key="datasource.local.name">
                   {{datasource.local.name}}
                 </a>
               </div>
             </div>
             <div class="col-9">
-              <pre v-if="!selectedDatasource?.diff">
+              <div v-show="selectedDatasource?.diff">
+                <div class="container text-center">
+                  <div class="row">
+                    <div class="col-7"></div>
+                    <div class="col-5">
+                      <button type="button" class="btn btn-primary" @click="downloadSelectedDatasource">
+                        Download
+                      <span class="material-icons">file_download</span>
+                      </button>
+                      <button type="button" class="btn btn-danger">
+                        Upload
+                        <span class="material-icons">file_upload</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <pre id="codeElement">
+                </pre>
+              </div>
+              <pre>
 {{selectedDatasource?.local?.sql}}
-              </pre>
-              <pre id="codeElement" v-show="selectedDatasource?.diff">
               </pre>
             </div>
           </div>

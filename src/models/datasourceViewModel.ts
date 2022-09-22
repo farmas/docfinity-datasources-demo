@@ -3,6 +3,7 @@ import { DatasourceDefinition } from 'src/typings';
 
 export class DatasourceViewModel {
   public diff: any = null;
+
   constructor(
     public local: DatasourceDefinition,
     public remote: DatasourceDefinition,

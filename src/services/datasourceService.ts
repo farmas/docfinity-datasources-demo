@@ -6,20 +6,16 @@ import { buildDatasources } from './datasourceCatalog';
 
 @Injectable()
 export class DatasourceService {
-  private localDatasources: DatasourceDefinition[];
-
-  constructor() {
-    this.localDatasources = buildDatasources();
-  }
-
   public getDatasources(): DatasourceViewModel[] {
-    return this.localDatasources.map(
+    const localDatasources = buildDatasources();
+    return localDatasources.map(
       (local) => new DatasourceViewModel(local, null),
     );
   }
 
   public compareDatasources(): DatasourceViewModel[] {
-    return this.localDatasources.map((local) => {
+    const localDatasources = buildDatasources();
+    return localDatasources.map((local) => {
       const serverJson = fs.readFileSync(
         `./data/server/${local.name}.raw.json`,
         'utf8',

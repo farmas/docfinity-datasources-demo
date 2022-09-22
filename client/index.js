@@ -10,8 +10,15 @@ createApp({
     }
   },
   methods: {
-    downloadSelectedDatasource(datasource) {
+    downloadSelectedDatasource() {
+      const datasource = this.selectedDatasource;
       console.log(`Downloading ${datasource.local.name}`);
+      axios.post('/api/datasources/download', { name: datasource.local.name }).then(response => {
+        console.log('Downloaded:', response.data);
+        this.selectedDatasource = response.data;
+        const index = this.datasources.findIndex(d => d.local.name === this.selectedDatasource.local.name);
+        this.datasources.splice(index, 1, this.selectedDatasource);
+      });
     },
     selectDatasource(datasource) {
       console.log(`Selected ${datasource.local.name}`, datasource);

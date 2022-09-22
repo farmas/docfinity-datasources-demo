@@ -1,11 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { DatasourceViewModel } from './models/datasourceViewModel';
+import { DownloadRequestModel } from './models/downloadRequestModel';
 import { DatasourceService } from './services/datasourceService';
-
-export class CompareRequest {
-  apiKey: string;
-  environment: string;
-}
 
 @Controller()
 export class AppController {
@@ -18,5 +14,10 @@ export class AppController {
   @Post('/api/datasources/compare')
   compareDatasoures() {
     return this.datasourceService.compareDatasources();
+  }
+
+  @Post('/api/datasources/download')
+  downloadDatasoure(@Body() body: DownloadRequestModel) {
+    return this.datasourceService.downloadDatasource(body.name);
   }
 }

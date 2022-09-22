@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import { Injectable } from '@nestjs/common';
-import { DatasourceViewModel } from 'src/models/datasourceViewModel';
-import { DatasourceDefinition } from 'src/typings';
+import { DatasourceViewModel } from '../models/datasourceViewModel';
+import { DatasourceDefinition } from '../typings';
 import { buildDatasources } from './datasourceCatalog';
 
 @Injectable()

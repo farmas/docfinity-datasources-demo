@@ -1,5 +1,5 @@
 import * as diff from 'diff';
-import { DatasourceDefinition } from 'src/typings';
+import { DatasourceDefinition } from '../typings';
 
 export class DatasourceViewModel {
   public diff: any = null;

@@ -1,4 +1,4 @@
-name: Compare Datasources Workflow.
+name: Compare Datasources
 
 on: workflow_dispatch
 

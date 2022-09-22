@@ -9,10 +9,10 @@ async function bootstrap() {
 
   const errors = results.filter((d) => !!d.diff);
   if (errors.length === 0) {
-    console.log('All datasources as expected');
+    console.log('All datasources in remote equal to local versions.');
   } else {
     console.log(
-      `Errors detected for datasource "${errors[0].local.name}":\n${errors[0].diff}`,
+      `Differences detected for datasource "${errors[0].local.name}":\n\n${errors[0].diff}`,
     );
     process.exit(1);
   }

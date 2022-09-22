@@ -1,0 +1,25 @@
+name: Compare Datasources Workflow.
+
+on: workflow_dispatch
+
+jobs:
+  sync-docfinity:
+    name: Compares Datasources in TEST
+    runs-on: ubuntu-latest
+    env:
+      # See https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode
+      NODE_OPTIONS: --unhandled-rejections=strict
+
+    steps:
+      - name: Checkout latest from ${{github.ref}}
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Node v14
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - name: Install dependencies
+        run: npm install
+      - name: Run compare process
+        run: npm run compare

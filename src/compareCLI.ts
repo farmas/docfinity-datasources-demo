@@ -5,7 +5,7 @@ import { DatasourceService } from './services/datasourceService';
 async function bootstrap() {
   const app = await NestFactory.createApplicationContext(AppModule);
   const datasourceService = app.get(DatasourceService);
-  const results = datasourceService.compareDatasources();
+  const results = await datasourceService.compareDatasources();
 
   const errors = results.filter((d) => !!d.diff);
   if (errors.length === 0) {

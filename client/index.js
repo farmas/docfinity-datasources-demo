@@ -33,6 +33,8 @@ createApp({
     },
     compare() {
       this.selectedDatasource = null;
+      this.datasources.forEach(e => e.remote = e.diff = null );
+
       axios.post('/api/datasources/compare').then(response => {
         console.log('compare response:', response.data);
         this.datasources = response.data;

@@ -6,9 +6,10 @@ import { DatasourceService } from './services/datasourceService';
 @Controller()
 export class AppController {
   constructor(private readonly datasourceService: DatasourceService) {}
+
   @Get('/api/datasources')
   getDatasoures(): DatasourceViewModel[] {
-    return this.datasourceService.getDatasources();
+    return this.datasourceService.getLocalDatasources();
   }
 
   @Post('/api/datasources/compare')
@@ -18,6 +19,6 @@ export class AppController {
 
   @Post('/api/datasources/download')
   downloadDatasoure(@Body() body: DownloadRequestModel) {
-    return this.datasourceService.downloadDatasource(body.name);
+    return this.datasourceService.downloadRemoteDatasource(body.name);
   }
 }

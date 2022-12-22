@@ -46,7 +46,7 @@
                 <a href="#"
                   v-for="datasource in datasources"
                   class="list-group-item list-group-item-action"
-                  :class="{ 'list-group-item-success': datasource.remote && !datasource.diff, 'list-group-item-danger': datasource.remote && datasource.diff }"
+                  :class="{ 'list-group-item-light': !datasource.remote, 'list-group-item-success': datasource.remote && !datasource.diff, 'list-group-item-danger': datasource.remote && datasource.diff }"
                   @click="selectDatasource(datasource)" :key="datasource.local.name">
                   {{datasource.local.name}}
                 </a>

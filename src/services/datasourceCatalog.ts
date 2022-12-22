@@ -2,10 +2,11 @@ import * as fs from 'fs';
 import { DatasourceDefinition } from '../typings';
 
 export function buildDatasources(): DatasourceDefinition[] {
-  return [
-    buildDatasourceDefinition('AEDS: Divisions'),
-    buildDatasourceDefinition('IND_Generic Record Retention Date'),
-  ];
+  return fs
+    .readdirSync('./data/datasources')
+    .filter((fileName) => fileName.endsWith('.json'))
+    .map((fileName) => fileName.substring(0, fileName.length - 5))
+    .map((datasourceName) => buildDatasourceDefinition(datasourceName));
 }
 
 function buildDatasourceDefinition(name: string): DatasourceDefinition {
@@ -24,9 +25,3 @@ function buildDatasourceDefinition(name: string): DatasourceDefinition {
     parameters: dfDatasource.parameters,
   };
 }
-
-/**
-  const properties: any[] = json.properties;
-    sql: properties.find((p) => p.name === 'sqlQuery').value[0],
- * 
- */

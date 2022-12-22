@@ -1,0 +1,37 @@
+{
+  "name": "EDM: Document Classification (Record Category and Record Type)",
+  "datasourceType": "DynamicSql",
+  "description": "",
+  "parameters": [
+    {
+      "name": "Record Category",
+      "source": "VARIABLE",
+      "dataType": "STRING",
+      "value": "Record Category"
+    },
+    {
+      "name": "DOCUMENT.documentType",
+      "source": "VARIABLE",
+      "dataType": "STRING",
+      "value": "DOCUMENT.documentType"
+    },
+    {
+      "name": "Record Type",
+      "source": "VARIABLE",
+      "dataType": "STRING",
+      "value": "Record Type"
+    },
+    {
+      "name": "username",
+      "source": "MACRO",
+      "dataType": "STRING",
+      "value": "#Username()"
+    },
+    {
+      "name": "DOCUMENT.category",
+      "source": "VARIABLE",
+      "dataType": "STRING",
+      "value": "DOCUMENT.category"
+    }
+  ]
+}
